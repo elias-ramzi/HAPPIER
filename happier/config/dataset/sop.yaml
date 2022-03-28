@@ -1,0 +1,16 @@
+name: SOPDataset
+num_classes_train_level0: 11318
+num_classes_train_level1: 12
+num_samples_train: 59551
+kwargs:
+  data_dir: /local/DEEPLEARNING/image_retrieval/Stanford_Online_Products
+  alpha: 1.0
+  relevance_type: pop
+
+sampler:
+  name: HierarchicalSampler
+  kwargs:
+    batch_size: 256
+    samples_per_class: 4
+    batches_per_super_tuple: 5
+    super_classes_per_batch: 2

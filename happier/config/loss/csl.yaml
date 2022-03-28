@@ -1,0 +1,11 @@
+name: ${loss.losses.0.name}
+losses:
+  - name: CSLLoss
+    weight: 1.0
+    kwargs:
+      num_proxies: ${dataset.num_classes_train_level0}
+      margins: [0.25, 0.35, 0.45]
+      scale: 32
+      embedding_size: ${model.kwargs.embed_dim}
+      reduce_type: sum
+    optimizer: ${optimizer.opt.0}

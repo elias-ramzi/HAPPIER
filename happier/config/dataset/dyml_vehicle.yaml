@@ -1,0 +1,16 @@
+name: DyMLDataset
+
+num_classes_train_level0: 39491
+num_classes_train_level1: 93
+num_classes_train_level2: 5
+
+kwargs:
+  data_dir: /local/DEEPLEARNING/image_retrieval/dyml_vehicle
+  alpha: 1.0
+  relevance_type: pop
+
+sampler:
+  name: MPerClassSampler
+  kwargs:
+    batch_size: 256
+    samples_per_class: 4

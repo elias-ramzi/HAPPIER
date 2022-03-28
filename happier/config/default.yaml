@@ -1,0 +1,25 @@
+defaults:
+
+    - experience: default
+
+    - dataset: sop
+
+    - loss: roadmap
+
+    - model: resnet
+
+    - optimizer: sop
+
+    - transform: sop
+
+    - override hydra/job_logging: colorlog
+
+    - override hydra/hydra_logging: colorlog
+
+hydra:
+  run:
+    dir: ${experience.log_dir}/${experience.experiment_name}/outputs
+
+  sweep:
+    dir: ${experience.log_dir}
+    subdir: ${experience.experiment_name}/outputs

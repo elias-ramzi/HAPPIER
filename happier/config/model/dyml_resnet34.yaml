@@ -1,0 +1,10 @@
+name: RetrievalNet
+freeze_batch_norm: False
+kwargs:
+  backbone_name: resnet34
+  embed_dim: 512
+  norm_features: True
+  without_fc: False
+  with_autocast: True
+  pretrained: False
+  pooling: default

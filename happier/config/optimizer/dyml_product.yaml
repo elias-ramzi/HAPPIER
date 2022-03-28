@@ -1,0 +1,27 @@
+opt:
+  - name: SGD
+    params: backbone
+    kwargs:
+      lr: 0.01
+      weight_decay: 0.0001
+      momentum: 0.9
+      nesterov: True
+    scheduler_on_epoch:
+      name: CosineAnnealingLR
+      kwargs:
+        T_max: ${experience.max_iter}
+        eta_min: 0.000001
+        last_epoch: -1
+    scheduler_on_step:
+    scheduler_on_val:
+
+  - name: ${optimizer.opt.0.name}
+    params: fc
+    kwargs:
+      lr: ${mult:2,${optimizer.opt.0.kwargs.lr}}
+      weight_decay: ${optimizer.opt.0.kwargs.weight_decay}
+      momentum: ${optimizer.opt.0.kwargs.momentum}
+      nesterov: ${optimizer.opt.0.kwargs.nesterov}
+    scheduler_on_epoch: ${optimizer.opt.0.scheduler_on_epoch}
+    scheduler_on_step:
+    scheduler_on_val:

@@ -1,0 +1,41 @@
+experiment_name: ???
+log_dir: /share/DEEPLEARNING/datasets/image_retrieval/experiments/
+seed: ???
+resume: null
+
+max_iter: 50
+warmup_step: null
+warmup_keys: [backbone]
+
+print_freq: 50
+train_eval_freq: -1
+val_eval_freq: -1
+test_eval_freq: 5
+save_model: 50
+
+accuracy_calculator:
+  compute_for_hierarchy_levels: [0]
+  exclude: []
+  recall_rate: []
+  hard_ap_for_level: []
+  with_binary_asi: False
+  overall_accuracy: False
+  metric_batch_size: 256
+  inference_batch_size: 256
+  num_workers: ${experience.num_workers}
+  pin_memory: ${experience.pin_memory}
+  convert_to_cuda: True
+  with_faiss: False
+  select_embedding: null
+
+
+num_workers: 10
+pin_memory: True
+
+record_gradient: True
+gradient_clipping_norm: null
+
+parallelize_loss: False
+training_loop: base_training_loop
+
+DEBUG: False

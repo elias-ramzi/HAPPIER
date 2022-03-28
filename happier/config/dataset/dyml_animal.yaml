@@ -1,0 +1,15 @@
+name: DyMLDataset
+num_classes_train_level0: 495
+num_classes_train_level1: 28
+num_classes_train_level2: 5
+
+kwargs:
+  data_dir: /local/DEEPLEARNING/image_retrieval/dyml_animal
+  alpha: 1.0
+  relevance_type: pop
+
+sampler:
+  name: MPerClassSampler
+  kwargs:
+    batch_size: 256
+    samples_per_class: 4

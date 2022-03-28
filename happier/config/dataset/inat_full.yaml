@@ -1,0 +1,26 @@
+name: INaturalist18Dataset
+
+num_classes_train_full0: 5690
+num_classes_train_full1: 3438
+num_classes_train_full2: 961
+num_classes_train_full3: 249
+num_classes_train_full4: 54
+num_classes_train_full5: 23
+num_classes_train_full6: 5
+
+num_classes_train_level0: 5690
+num_classes_train_level1: 13
+
+num_samples_train: 325846
+
+kwargs:
+  data_dir: /local/DEEPLEARNING/image_retrieval/Inaturalist
+  alpha: 1.0
+  relevance_type: pop
+  hierarchy_mode: full
+
+sampler:
+  name: MPerClassSampler
+  kwargs:
+    batch_size: 256
+    samples_per_class: 4

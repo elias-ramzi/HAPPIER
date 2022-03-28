@@ -1,0 +1,35 @@
+name: HAPPIER_05
+losses:
+  - name: SupHAP
+    weight: ${sub:1,${loss.losses.1.weight}}
+    kwargs:
+      tau: 0.01
+      rho: 100.0
+      offset: 1.44
+      delta: 0.05
+      start: 0.5
+      beta: 25
+      gamma: 0.5
+      leak: 10
+      with_hrank: True
+
+  - name: NormalizedSoftmaxLoss
+    weight: 0.5
+    kwargs:
+      hierarchy_level: 0
+      num_classes: ${dataset.num_classes_train_level0}
+      embedding_size: ${model.kwargs.embed_dim}
+    optimizer:
+      name: Adam
+      params:
+      kwargs:
+        lr: 10.0
+        weight_decay: 0.0
+      scheduler_on_epoch:
+        name: CosineAnnealingLR
+        kwargs:
+          T_max: ${experience.max_iter}
+          eta_min: ${div:${loss.losses.1.optimizer.kwargs.lr},100}
+          last_epoch: -1
+      scheduler_on_step:
+      scheduler_on_val:

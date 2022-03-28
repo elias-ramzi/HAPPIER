@@ -1,0 +1,15 @@
+name: DyMLProduct
+num_classes_train_level0: 1639
+num_classes_train_level1: 171
+num_classes_train_level2: 36
+
+kwargs:
+  data_dir: /local/DEEPLEARNING/image_retrieval/dyml_product
+  alpha: 1.0
+  relevance_type: pop
+
+sampler:
+  name: MPerClassSampler
+  kwargs:
+    batch_size: 256
+    samples_per_class: 4

@@ -1,0 +1,22 @@
+name: HAPPIER
+losses:
+  - name: HAPLoss
+    weight: ${sub:1,${loss.losses.1.weight}}
+    kwargs:
+      tau: 0.01
+      rho: 100.0
+      offset: 1.0
+      delta: 0.05
+      start: 0.0
+      beta: 25
+      gamma: 0.5
+      leak: 10
+      with_hrank: False
+
+  - name: ClusterLoss
+    weight: 0.1
+    kwargs:
+      hierarchy_level: 0
+      num_classes: ${dataset.num_classes_train_level0}
+      embedding_size: ${model.kwargs.embed_dim}
+    optimizer: ${optimizer.opt.1}
