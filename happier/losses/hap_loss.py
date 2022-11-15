@@ -24,7 +24,6 @@ def linear(tens, a, b):
     tens.add_(b)
 
 
-# @profile
 def step_rank(tens, tau, rho, offset, delta=None, start=0.5, target=None, general=False):
     device = tens.device
     dtype = tens.dtype
@@ -46,7 +45,7 @@ def step_rank(tens, tau, rho, offset, delta=None, start=0.5, target=None, genera
 
             margin_mask = tens > delta
             tens[inferior_relevance & pos_mask & ~margin_mask] = start + tau_sigmoid(tens[inferior_relevance & pos_mask & ~margin_mask], tau).type(dtype)
-            tens[inferior_relevance & pos_mask & margin_mask] = rho * tens[inferior_relevance & pos_mask & margin_mask] + offset
+            tens[inferior_relevance & pos_mask & margin_mask] = rho * (tens[inferior_relevance & pos_mask & margin_mask] - delta) + offset
 
         tens[inferior_relevance & (~pos_mask)] = tau_sigmoid(tens[inferior_relevance & (~pos_mask)], tau).type(dtype)
 

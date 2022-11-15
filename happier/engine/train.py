@@ -104,15 +104,6 @@ def train(
             )
             torch.cuda.empty_cache()
 
-        # """""""""""""""""" Evaluate Model """"""""""""""""""""""""""
-        # if metrics is not None:
-        #     for sch, key in scheduler["on_val"]:
-        #         sch.step(metrics[config.experience.eval_split][key])
-        #
-        #     for crit, _ in criterion:
-        #         if hasattr(crit, 'on_val'):
-        #             crit.on_val(metrics[config.experience.eval_split][key])
-
         # """""""""""""""""" Logging Step """"""""""""""""""""""""""
         for grp, opt in optimizer.items():
             writer.add_scalar(f"LR/{grp}", list(lib.get_lr(opt).values())[0], e)

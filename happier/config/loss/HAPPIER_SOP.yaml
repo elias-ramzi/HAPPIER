@@ -1,6 +1,6 @@
 name: HAPPIER
 losses:
-  - name: SupHAP
+  - name: HAPLoss
     weight: ${sub:1,${loss.losses.1.weight}}
     kwargs:
       tau: 0.01
@@ -13,7 +13,7 @@ losses:
       leak: 10
       with_hrank: False
 
-  - name: NormalizedSoftmaxLoss
+  - name: ClusterLoss
     weight: 0.1
     kwargs:
       hierarchy_level: 0

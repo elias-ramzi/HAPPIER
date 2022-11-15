@@ -110,7 +110,7 @@ class Getter:
             }
             lib.LOGGER.info(dataset)
             return dataset
-        elif (config.name == "DyMLDataset") and mode.startswith("test") and (not config.kwargs.use_custom_splits):
+        elif (config.name == "DyMLDataset") and mode.startswith("test"):
             lib.LOGGER.warning("Not using custom splits for DyML")
             dts_fn = getattr(datasets, config.name)
             dataset = [

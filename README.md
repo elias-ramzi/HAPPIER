@@ -59,6 +59,22 @@ Do not hesitate to create an issue if you have trouble understanding the configs
 
 Instructions coming soon!
 
+### DyML-Vehicle
+CUDA_VISIBLE_DEVICES='0' python happier/run.py \
+'experience.experiment_name=HAPPIER_dyml_vehicle' \
+'experience.log_dir=experiments/HAPPIER' \
+experience.seed=0 \
+experience.accuracy_calculator.compute_for_hierarchy_levels=[0] \
+experience.accuracy_calculator.overall_accuracy=True \
+experience.accuracy_calculator.exclude=[NDCG,H-AP] \
+experience.accuracy_calculator.recall_rate=[10,20] \
+experience.accuracy_calculator.with_binary_asi=True \
+optimizer=dyml_animal \
+model=dyml_resnet34 \
+transform=inat \
+dataset=dyml_vehicle \
+loss=HAPPIER
+
 
 ## Resources
 
