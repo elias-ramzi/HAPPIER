@@ -26,7 +26,6 @@ accuracy_calculator:
   pin_memory: ${experience.pin_memory}
   convert_to_cuda: True
   with_faiss: False
-  select_embedding: null
 
 
 num_workers: 10

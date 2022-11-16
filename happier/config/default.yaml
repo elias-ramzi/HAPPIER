@@ -4,7 +4,7 @@ defaults:
 
     - dataset: sop
 
-    - loss: roadmap
+    - loss: HAPPIER
 
     - model: resnet
 

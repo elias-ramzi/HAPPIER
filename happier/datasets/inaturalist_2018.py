@@ -7,7 +7,7 @@ import happier.lib as lib
 from happier.datasets.base_dataset import BaseDataset
 
 
-class INaturalist18Dataset(BaseDataset):
+class iNaturalist18Dataset(BaseDataset):
 
     HIERARCHY_LEVEL = 7
 

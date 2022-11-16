@@ -19,4 +19,4 @@ losses:
       hierarchy_level: 0
       num_classes: ${dataset.num_classes_train_level0}
       embedding_size: ${model.kwargs.embed_dim}
-    optimizer: ${optimizer.opt.1}
+    optimizer: ${optimizer.opt.0}
