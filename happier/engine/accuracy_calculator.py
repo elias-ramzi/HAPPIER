@@ -28,7 +28,6 @@ class AccuracyCalculator:
         pin_memory=True,
         convert_to_cuda=True,
         with_faiss=False,
-        select_embedding=None,
         **kwargs,
     ):
         self.compute_for_hierarchy_levels = sorted(set(compute_for_hierarchy_levels))
@@ -43,7 +42,6 @@ class AccuracyCalculator:
         self.pin_memory = pin_memory
         self.convert_to_cuda = convert_to_cuda
         self.with_faiss = with_faiss
-        self.select_embedding = select_embedding
 
         self.METRICS_DICT = get_metrics_dict(
             recall_rate=self.recall_rate,
@@ -63,7 +61,6 @@ class AccuracyCalculator:
             net,
             loader,
             self.convert_to_cuda,
-            self.select_embedding,
         )
 
     def batch_metrics(
@@ -202,7 +199,6 @@ class AccuracyCalculator:
             f"    pin_memory={self.pin_memory},\n"
             f"    convert_to_cuda={self.convert_to_cuda},\n"
             f"    with_faiss={self.with_faiss},\n"
-            f"    select_embedding={self.select_embedding},\n"
             ")"
         )
         return repr

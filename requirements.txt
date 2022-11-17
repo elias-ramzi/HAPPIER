@@ -1,3 +1,4 @@
+# Lib
 numpy
 torch==1.8.1
 torchvision==0.9.1
@@ -8,15 +9,17 @@ tqdm
 tensorboard
 matplotlib
 pytorch-metric-learning
-timm
-scikit-learn
 hydra-core==1.1
 hydra_colorlog==1.1.0
+
+# Utils
 ipython
 jupyter
+SciencePlots
+
+# Dev
 ipdb
 autopep8
 flake8
 pylint
 isort
-SciencePlots

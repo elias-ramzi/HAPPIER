@@ -10,7 +10,7 @@ opt:
       name: CosineAnnealingLR
       kwargs:
         T_max: ${experience.max_iter}
-        eta_min: 0.000001
+        eta_min: 0.00001
         last_epoch: -1
     scheduler_on_step:
     scheduler_on_val:

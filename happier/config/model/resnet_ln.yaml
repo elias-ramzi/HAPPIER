@@ -6,4 +6,5 @@ kwargs:
   norm_features: True
   without_fc: False
   with_autocast: True
+  pretrained: True
   pooling: default

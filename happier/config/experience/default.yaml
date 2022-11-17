@@ -3,15 +3,15 @@ log_dir: /share/DEEPLEARNING/datasets/image_retrieval/experiments/
 seed: ???
 resume: null
 
-max_iter: 50
+max_iter: 100
 warmup_step: null
 warmup_keys: [backbone]
 
 print_freq: 50
 train_eval_freq: -1
 val_eval_freq: -1
-test_eval_freq: 5
-save_model: 50
+test_eval_freq: 20
+save_model: 20
 
 accuracy_calculator:
   compute_for_hierarchy_levels: [0]
@@ -26,7 +26,6 @@ accuracy_calculator:
   pin_memory: ${experience.pin_memory}
   convert_to_cuda: True
   with_faiss: False
-  select_embedding: null
 
 
 num_workers: 10

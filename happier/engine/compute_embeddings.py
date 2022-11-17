@@ -10,7 +10,6 @@ def compute_embeddings(
     net,
     loader,
     convert_to_cuda=False,
-    select_embedding=None,
     with_paths=False,
 ):
     features = []

@@ -1,4 +1,4 @@
-name: INaturalist18Dataset
+name: iNaturalist18Dataset
 
 num_classes_train_full0: 5690
 num_classes_train_full1: 3438
