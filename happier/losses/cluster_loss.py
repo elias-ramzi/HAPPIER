@@ -17,39 +17,29 @@ class ClusterLoss(nn.Module):
         self,
         embedding_size,
         num_classes,
-        num_centers=1,
         temperature=0.05,
-        temperature_centers=0.1,
         hierarchy_level=None,
-        multi_label=False,
     ):
         super().__init__()
         self.embedding_size = embedding_size
         self.num_classes = num_classes
-        self.num_centers = num_centers
         self.temperature = temperature
-        self.temperature_centers = temperature_centers
         self.hierarchy_level = hierarchy_level
 
-        self.weight = nn.Parameter(torch.Tensor(num_classes * num_centers, embedding_size))
+        self.weight = nn.Parameter(torch.Tensor(num_classes, embedding_size))
         # Initialization from nn.Linear (https://github.com/pytorch/pytorch/blob/v1.0.0/torch/nn/modules/linear.py#L129)
         stdv = 1. / math.sqrt(self.weight.size(1))
         self.weight.data.uniform_(-stdv, stdv)
 
-        self.loss_fn = nn.BCEWithLogitsLoss() if multi_label else nn.CrossEntropyLoss()
+        self.loss_fn = nn.CrossEntropyLoss()
 
     def forward(self, embeddings, instance_targets, relevance_fn=None, **kwargs,):
         if self.hierarchy_level is not None:
             instance_targets = instance_targets[:, self.hierarchy_level]
 
-        norm_weight = nn.functional.normalize(self.weight, dim=1)
+        norm_weight = F.normalize(self.weight, dim=1)
 
-        prediction_logits = nn.functional.linear(embeddings, norm_weight)
-
-        if self.num_centers > 1:
-            prediction_logits = prediction_logits.reshape(embeddings.size(0), self.num_classes, self.num_centers)
-            prob = F.softmax(prediction_logits / self.temperature_centers, dim=2)
-            prediction_logits = (prediction_logits * prob).sum(dim=2)
+        prediction_logits = F.linear(embeddings, norm_weight)
 
         loss = self.loss_fn(prediction_logits / self.temperature, instance_targets)
         return loss

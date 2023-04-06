@@ -2,7 +2,6 @@ from functools import partial
 
 import torch
 import torch.nn as nn
-from tqdm import tqdm
 
 import happier.lib as lib
 from happier.losses.tools import reduce
@@ -102,17 +101,12 @@ class SmoothRankHAP(nn.Module):
             lib.LOGGER.warning(f"Hierarchy_level (={self.hierarchy_level}) was passed for a HAP surrogate loss")
 
     # @profile
-    def general_forward(self, embeddings, labels, ref_embeddings, ref_labels, relevance_fn, verbose=False):
+    def general_forward(self, embeddings, labels, ref_embeddings, ref_labels, relevance_fn):
         batch_size = embeddings.size(0)
         device = embeddings.device
 
         mhap_score = []
-
-        iterator = range(batch_size)
-        if verbose:
-            iterator = tqdm(iterator, leave=None)
-
-        for idx in iterator:
+        for idx in range(batch_size):
             _score = torch.mm(embeddings[idx].view(1, -1), ref_embeddings.t())[0]
             pos_mask = lib.create_label_matrix(
                 labels[idx].view(1, -1), ref_labels,
@@ -189,7 +183,6 @@ class SmoothRankHAP(nn.Module):
         ref_embeddings=None,
         ref_labels=None,
         force_general=False,
-        verbose=False,
         **kwargs,
     ):
         if self.hierarchy_level != "MULTI":
@@ -214,7 +207,7 @@ class SmoothRankHAP(nn.Module):
             relevances = relevance_fn(target).type(scores.dtype)  # / (labels.size(1) - 1)
             mhap = self.quick_forward(scores, target, relevances)
         else:
-            mhap = self.general_forward(embeddings, labels, ref_embeddings, ref_labels, relevance_fn, verbose)
+            mhap = self.general_forward(embeddings, labels, ref_embeddings, ref_labels, relevance_fn)
 
         if self.return_type == 'HAP':
             return mhap

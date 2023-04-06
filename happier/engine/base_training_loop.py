@@ -124,10 +124,7 @@ def base_training_loop(
                     lib.LOGGER.info(f'Loss: {k}: {v} ')
 
         if config.experience.DEBUG:
-            if isinstance(config.experience.DEBUG, int):
-                if (i+1) > config.experience.DEBUG:
-                    break
-            else:
+            if (i+1) > int(config.experience.DEBUG):
                 break
 
     for crit, _ in criterion:
