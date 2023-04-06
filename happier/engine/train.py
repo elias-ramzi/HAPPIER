@@ -33,16 +33,6 @@ def train(
     metrics = None
     for e in range(1 + restore_epoch, config.experience.max_iter + 1):
 
-        for crit, _ in criterion:
-            if hasattr(crit, "use_net") and crit.not_init:
-                crit_loader = DataLoader(
-                    train_dts,
-                    num_workers=config.experience.num_workers,
-                    pin_memory=config.experience.pin_memory,
-                    batch_size=config.experience.accuracy_calculator.inference_batch_size,
-                )
-                crit.use_net(net, crit_loader)
-
         lib.LOGGER.info(f"Training : @epoch #{e} for model {config.experience.experiment_name}")
         start_time = time()
 
@@ -110,7 +100,7 @@ def train(
 
         for k, v in logs.items():
             lib.LOGGER.info(f"{k} : {v:.4f}")
-            writer.add_scalar(f"NDCG/Train/{k}", v, e)
+            writer.add_scalar(f"HAPPIER/Train/{k}", v, e)
 
         if metrics is not None:
             for split, mtrc in metrics.items():
@@ -118,7 +108,7 @@ def train(
                     if k == 'epoch':
                         continue
                     lib.LOGGER.info(f"{split} --> {k} : {np.around(v*100, decimals=2)}")
-                    writer.add_scalar(f"NDCG/{split.title()}/Evaluation/{k}", v, e)
+                    writer.add_scalar(f"HAPPIER/{split.title()}/Evaluation/{k}", v, e)
                 print()
 
         end_time = time()
